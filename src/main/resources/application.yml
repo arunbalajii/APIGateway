@@ -1,0 +1,35 @@
+server:
+ port: 8765
+
+spring:
+  application:
+    name: APIGateway
+  
+
+  cloud:
+   gateway:
+      routes:
+      - id: WhishlistService
+        uri: http://localhost:8080/wishlist/
+        predicates:
+        - Path=/wishlist/**
+
+
+  main:
+    web-application-type: reactive
+
+  #      - id: ProductService
+#        uri: http://localhost:9030/api/products/
+#        predicates:
+#         - Path=/api/products/**
+
+eureka:
+  client:
+    service-url:
+     defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+
+#zuul:
+#  routes:
+#    wishlist-service: /wishlist/**
